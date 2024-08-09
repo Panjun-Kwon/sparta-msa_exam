@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: auth-service
+
+server:
+  port: 19095
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka
+
+service:
+  jwt:
+    access-expiration: 360000000
+    secret-key: eab3c01eae731f53d53b954555b7a0812e1084ca549225f201d8b3727429bb802becd4ca54922bb802bec8fd5318
+
+management:
+  zipkin:
+    tracing:
+      endpoint: "http://localhost:9411/api/v2/spans"
+  tracing:
+    sampling:
+      probability: 1.0

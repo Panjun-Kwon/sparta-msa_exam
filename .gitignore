@@ -1,0 +1,3 @@
+
+product/src/main/resources/application-prod.yml
+order/src/main/resources/application-prod.yml

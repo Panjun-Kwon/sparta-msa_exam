@@ -1,0 +1,48 @@
+spring:
+  main:
+    web-application-type: reactive
+
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      routes:
+        - id: order-service
+          uri: lb://order-service/
+          predicates:
+            - Path=/order/**
+
+        - id: product-service
+          uri: lb://product-service/
+          predicates:
+            - Path=/products/**
+
+        - id: auth-service
+          uri: lb://auth-service/
+          predicates:
+            - Path=/auth/**
+
+      discovery:
+        locator:
+          enabled: true
+
+server:
+  port: 19091
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka
+
+service:
+  jwt:
+    secret-key: eab3c01eae731f53d53b954555b7a0812e1084ca549225f201d8b3727429bb802becd4ca54922bb802bec8fd5318
+
+management:
+  zipkin:
+    tracing:
+      endpoint: "http://localhost:9411/api/v2/spans"
+  tracing:
+    sampling:
+      probability: 1.0
